@@ -14,4 +14,4 @@ While taking the advanced data structures class (CSE 100) at UCSD, I feel like I
 - Red-Black Tree
 
 #### Implemented Data Structues
-Tries (without remove)
+- Tries (Multiway Trie)
