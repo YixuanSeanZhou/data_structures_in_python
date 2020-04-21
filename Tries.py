@@ -69,6 +69,9 @@ class Trie:
             if char_list[index] in curr_node.out_going_paths:
                 curr_node = curr_node.out_going_paths[char_list[index]]
                 index += 1
+                end = index == len(char_list) - 1
+                if end:
+                    curr_node.set_to_word_node()
             else:
                 end = index == len(char_list) - 1
                 curr_node.add_path(char_list[index], end)
