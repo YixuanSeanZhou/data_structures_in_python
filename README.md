@@ -12,6 +12,7 @@ While taking the advanced data structures class (CSE 100) at UCSD, I feel like I
 - Treap
 - AVL Tree
 - Red-Black Tree
+- Ternary Tree
 
 #### Implemented Data Structues
 - Tries (Multiway Trie)
