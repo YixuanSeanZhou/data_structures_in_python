@@ -7,6 +7,7 @@ While taking the advanced data structures class (CSE 100) at UCSD, I feel like I
 #### Trees:
 - Regular BST
 - Heap
+  - Ordered by importance $O(n)$
 - K-D Tree
 - Treap
 - AVL Tree
