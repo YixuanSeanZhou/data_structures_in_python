@@ -1,7 +1,3 @@
-from __future__ import annotations
-from typing import Tuple
-
-
 class Node:
     """
     Nodes in the trie
