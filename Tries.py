@@ -135,10 +135,8 @@ if __name__ == '__main__':
     print(Trie.find('asdf'))
     Trie.insert('abcdefg')
     Trie.insert('asdf')
-    
     print(Trie.find('asdf'))
     print()
     print('Auto Complete')
     ret = Trie.root.auto_complete()
-
     print(ret)
