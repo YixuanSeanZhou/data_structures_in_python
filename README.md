@@ -63,3 +63,4 @@ There are three main considerations for a good hash table
 #### Implemented Data Structues
 - Tries (Multiway Trie)
 - Suffix Array
+- Burrows-Wheeler Transform
