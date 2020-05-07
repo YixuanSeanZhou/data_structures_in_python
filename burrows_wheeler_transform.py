@@ -5,8 +5,9 @@ The ending string is $
 
 def bwt(str_to_transform: str) -> str:
     bw_matrix = []
-    str_to_transform += '$'
+    str_to_transform = '^' + str_to_transform + '|'
     str_len = len(str_to_transform)
+    # Create the matrix
     for i in range(0, str_len):
         rotation_str = ''
         for j in range(0, str_len):
@@ -21,27 +22,24 @@ def bwt(str_to_transform: str) -> str:
 
 
 def reverse_bwt(str_to_revert: str) -> str:
-    last_row = list(str_to_revert)
-    first_row = sorted(last_row)
     str_len = len(str_to_revert)
-    result = [first_row[0]]
-    for i in range(1, str_len - 1):
-        char_to_search = result[i-1]
-        num_occur = result.count(char_to_search)
-        count = 0
-        for j in range(1, str_len):
-            if last_row[j] == char_to_search:
-                count += 1
-                if num_occur == count:
-                    result.append(first_row[j])
-                    break
-
-    result.append(last_row[0])
-    result.pop(0)
-    return ''.join(result)
-
+    bw_matrix = [''] * str_len
+    for i in range(str_len):
+        bw_matrix = sorted(str_to_revert[i] +
+                           bw_matrix[i] for i in range(str_len))
+    ret = ''
+    for row in bw_matrix:
+        if row[str_len - 1] == '|':
+            ret = ''.join(row)
+            break
+    ret = ret[1:-1]
+    return ret
 
 
 if __name__ == '__main__':
-    print(bwt('THOMASZHOU'))
-    print(reverse_bwt('ABB$AILA'))
+    s = 'ABSCASDFOASD'
+    r = bwt(s)
+    print(r)
+    s_back = reverse_bwt(r)
+    print(s_back)
+    print(s == s_back)
