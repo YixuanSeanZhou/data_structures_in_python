@@ -50,6 +50,16 @@ There are three main considerations for a good hash table
 2. Collision resolution
 3. Size of the hash table
 
+#### String Searching Algroithms
+- Aho-Corasick Algorithm
+  - Use Case: Given a database of many small strings. A query that is very long. Find the occurances of strings in our database in the query.
+- Suffix Array
+  - Use Case: Given a long string. A query that contains many short strings. Find all the occurance of a query as a sub string in the original string.
+- Burrows-Wheeler Transform
+  - Use Case: Compression
+  - Also a fast search.
+
 
 #### Implemented Data Structues
 - Tries (Multiway Trie)
+- Suffix Array
