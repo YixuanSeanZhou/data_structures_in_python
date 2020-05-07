@@ -70,6 +70,7 @@ class Trie:
         Init an empty Trie
         """
         self.root = Node()
+        self.num_node = 1
 
     def find(self, word: str) -> (Node, bool, bool):
         """
@@ -105,6 +106,7 @@ class Trie:
             else:
                 end = index == len(char_list) - 1
                 curr_node.add_path(char_list[index], end)
+                self.num_node += 1
 
     def remove(self, word: str) -> bool:
         char_list = list(word)
@@ -124,19 +126,15 @@ class Trie:
 
 if __name__ == '__main__':
     Trie = Trie()
-    Trie.insert('abc')
-    print(Trie.find('abc'))
-    print(Trie.find('asdf'))
-    Trie.insert('asdf')
-    print(Trie.find('asdf'))
-    print()
-    print('Perform remove')
-    print(Trie.remove('asdf'))
-    print(Trie.find('asdf'))
-    Trie.insert('abcdefg')
-    Trie.insert('asdf')
-    print(Trie.find('asdf'))
-    print()
-    print('Auto Complete')
-    ret = Trie.root.auto_complete()
-    print(ret)
+    Trie.insert('TheFastAndTheFurious')
+    Trie.insert('2Fast2Furious')
+    Trie.insert('TheFastAndTheFuriousTokyoDrift')
+    Trie.insert('FastAndFurious')
+    Trie.insert('FastFive')
+    Trie.insert('FastAndFurious6')
+    Trie.insert('Furious7')
+    Trie.insert('TheFateOfTheFurious')
+    Trie.insert('FastAndFuriousPresentsHobbsAndShaw')
+    Trie.insert('F9')
+    print(Trie.num_node)
+
