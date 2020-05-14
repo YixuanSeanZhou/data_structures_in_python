@@ -137,4 +137,3 @@ if __name__ == '__main__':
     Trie.insert('FastAndFuriousPresentsHobbsAndShaw')
     Trie.insert('F9')
     print(Trie.num_node)
-
