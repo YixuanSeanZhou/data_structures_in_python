@@ -64,3 +64,4 @@ There are three main considerations for a good hash table
 - Tries (Multiway Trie)
 - Suffix Array
 - Burrows-Wheeler Transform
+- Binary Tree with remove not working
