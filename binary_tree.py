@@ -1,3 +1,5 @@
+from collections import deque
+
 class Node():
 
     def __init__(self):
@@ -32,7 +34,7 @@ class Node():
                 self.right.data = data
                 return True
             return self.right.insert(data)
-
+    """
     def rarm(self, pip):
         if self.left:
             return self.left.rarm(self.left)
@@ -67,7 +69,7 @@ class Node():
                 return self.right.remove(data, self.right)
             else:
                 return None
-
+    """
     def write(self):
         print(self.data)
         if self.left:
@@ -112,6 +114,29 @@ class BinaryTree():
     def write_tree(self):
         self.root.write()
 
+    def bfs(self):
+        ret = []
+        if self.root is None:
+            return ret
+        dq = deque()
+        dq.append(self.root)
+        while len(dq) > 0:
+            curr_level = []
+            for i in range(len(dq)):
+                curr_node = dq.popleft()
+                curr_level.append(curr_node.data)
+                if curr_node.left:
+                    dq.append(curr_node.left)
+                if curr_node.right:
+                    dq.append(curr_node.right)
+            ret.append(curr_level)
+        return ret
+
+    def write_level_order(self):
+        levels = self.bfs()
+        for i in range(len(levels)):
+            print("Level " + str(i) + " : " + str(levels[i]))
+
 
 if __name__ == '__main__':
     tree = BinaryTree()
@@ -122,7 +147,14 @@ if __name__ == '__main__':
     print(tree.find(2))
     print('===================\n')
     tree.write_tree()
-    print('Testing remove ======')
-    print(tree.remove(2))
+    tree = BinaryTree()
+    tree.insert(2)
+    tree.insert(1)
+    tree.insert(3)
+    tree.insert(4)
     tree.write_tree()
-    print('===================\n')
+    print(tree.write_level_order())
+    # print('Testing remove ======')
+    # print(tree.remove(2))
+    # tree.write_tree()
+    # print('===================\n')

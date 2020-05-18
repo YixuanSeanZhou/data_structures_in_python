@@ -1,5 +1,6 @@
 from heapq import heappush, heappop
 
+
 class Node():
     def __init__(self, data, count):
         self.data = data
@@ -14,28 +15,36 @@ class Node():
         else:
             return False
 
+    def __lt__(self, other):
+        if isinstance(other, Node):
+            return str(self.data) < str(other.data)
+        else:
+            return False
+
 
 class Huffman_Tree:
 
     def __init__(self, s_to_encode):
+        self.root = None 
+        self.leaf_list = None
         c_count = {}
         for char in s_to_encode:
             if char in c_count:
                 c_count[char] += 1
             else:
                 c_count[char] = 0
-        char_count_list = [(k, v) for k, v in dict.items()]
-        self.root, self.leaves = self.build_tree(char_count_list)
+        char_count_list = [(k, v) for k, v in c_count.items()]
+        self.build_tree(char_count_list)
 
-    def build_tree(char_count_list):
+    def build_tree(self, char_count_list):
         node_pq = []
         for pair in char_count_list:
             node = Node(pair[0], pair[1])
             heappush(node_pq, (node.count, node))
-        leaf_list = []
+        self.leaf_list = []
 
-        for node in node_pq:
-            leaf_list.append(node)
+        for _, node in node_pq:
+            self.leaf_list.append(node)
 
         while len(node_pq) > 1:
             _, left = heappop(node_pq)
@@ -47,8 +56,7 @@ class Huffman_Tree:
             right.parent = parent
             heappush(node_pq, (parent.count, parent))
 
-        root = node_pq[0]
-        return root, leaf_list
+        self.root = node_pq[0]
 
     def encode(self, message):
         ret = ''
@@ -57,11 +65,16 @@ class Huffman_Tree:
             ret += encoded_char
             if not status:
                 return "CHAR" + str(char) + "NOT VALID"
+        return ret
 
     def encode_char(self, char):
         curr = None
         e_char = ''
-        for l in self.leaves:
+        # The edge case for only one char
+        if len(self.leaf_list) == 1 and char == self.root.data:
+            return True, '0'
+        # General case
+        for l in self.leaf_list:
             curr = l if char == l.data else None
         if curr is None:
             return False, "NOT VALID MESSAGE"
@@ -71,8 +84,8 @@ class Huffman_Tree:
 
     def decode(self, message):
         curr = self.root
-        if root.is_leaf():
-            return root.data
+        if self.root.is_leaf():
+            return self.root.data
         ret = ''
         for i in message:
             if i == '0':
@@ -127,7 +140,7 @@ def height(node):
 
 
 if __name__ == '__main__':
-    char_count_list = [('+', 16), ('O', 23), ('A', 30), ('C', 40), ('E', 41), ('S', 44), ('N', 52), ('R', 68), ('T', 75), ('H', 82), ('I', 87)]
-    root = build_tree(char_count_list)
-    printLevelOrder(root)
-    print(decode(root, '0010111101110111100011101110000111000101111100'))
+
+    tree = Huffman_Tree('aaabb')
+    tree.encode('a')
+    # print(decode(root, '0010111101110111100011101110000111000101111100'))
