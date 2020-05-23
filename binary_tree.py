@@ -1,13 +1,16 @@
+from __future__ import annotations
 from collections import deque
+
 
 class Node():
 
-    def __init__(self):
+    def __init__(self, data, parent):
         self.left = None
         self.right = None
-        self.data = None
+        self.parent = parent
+        self.data = data
 
-    def find(self, data):
+    def find(self, data) -> bool:
         if data == self.data:
             return data
         elif data < self.data:
@@ -19,57 +22,20 @@ class Node():
                 return None
             return self.right.find(data)
 
-    def insert(self, data):
+    def insert(self, data) -> bool:
         if data == self.data:
             return False
         elif data < self.data:
             if not self.left:
-                self.left = Node()
-                self.left.data = data
+                self.left = Node(data, self)
                 return True
             return self.left.insert(data)
         else:
             if not self.right:
-                self.right = Node()
-                self.right.data = data
+                self.right = Node(data, self)
                 return True
             return self.right.insert(data)
-    """
-    def rarm(self, pip):
-        if self.left:
-            return self.left.rarm(self.left)
-        else:
-            pip = self.left
-            return self
 
-    def remove(self, data, pip):
-        if data == self.data:
-            if self.left and self.right:
-                node = self.right.rarm(self.right)
-                pip = node
-                node.left = self.left
-                node.right = self.right
-            elif self.left:
-                pip = self.left
-                return data
-            elif self.right:
-                pip = self.right
-                return data
-            else:
-                pip = None
-                return data
-
-        elif data < self.data:
-            if self.left:
-                return self.left.remove(data, self.left)
-            else:
-                return None
-        else:
-            if self.right:
-                return self.right.remove(data, self.right)
-            else:
-                return None
-    """
     def write(self):
         print(self.data)
         if self.left:
@@ -92,15 +58,14 @@ class BinaryTree():
         No duplicates is allowed
         """
         if not self.root:
-            self.root = Node()
-            self.root.data = data
+            self.root = Node(data, self.root)
             return True
         else:
             return self.root.insert(data)
 
     def remove(self, data):
         if self.root:
-            data = self.root.remove(data, self.root)
+            data = self.root.remove(data)
             return data
         else:
             return None
@@ -154,6 +119,8 @@ if __name__ == '__main__':
     tree.insert(4)
     tree.write_tree()
     print(tree.write_level_order())
+    tree.remove(2)
+    tree.write_tree()
     # print('Testing remove ======')
     # print(tree.remove(2))
     # tree.write_tree()
