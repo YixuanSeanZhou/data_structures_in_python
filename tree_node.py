@@ -38,3 +38,13 @@ class Node:
                 return False
             else:
                 return self.right.find(data)
+
+    def write(self):
+        """
+        In order traversal
+        """
+        print(self.data)
+        if self.left:
+            self.left.write()
+        if self.right:
+            self.right.write()

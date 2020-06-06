@@ -1,7 +1,7 @@
 from __future__ import annotations
 from collections import deque
 
-from binary_tree import Node
+from tree_node import Node
 
 
 class BinaryTree():
@@ -106,7 +106,8 @@ class BinaryTree():
         return True
 
     def write_tree(self):
-        self.root.write()
+        if self.root:
+            self.root.write()
 
     def bfs(self):
         ret = []
@@ -150,7 +151,7 @@ if __name__ == '__main__':
     print(tree.write_level_order())
     tree.remove(2)
     tree.write_tree()
-    # print('Testing remove ======')
-    # print(tree.remove(2))
-    # tree.write_tree()
-    # print('===================\n')
+    print('Testing remove ======')
+    print(tree.remove(2))
+    tree.write_tree()
+    print('===================\n')
